@@ -5,6 +5,8 @@ const refs = {
   background: document.body,
   timerId: null,
 };
+refs.startBtn.disabled = false;
+refs.stopBtn.disabled = true;
 
 function getRandomHexColor() {
   return `#${Math.floor(Math.random() * 16777215)
@@ -18,6 +20,8 @@ refs.startBtn.addEventListener('click', () => {
   }
 
   refs.buttonIsActive = true;
+  refs.startBtn.disabled = true;
+  refs.stopBtn.disabled = false;
 
   refs.timerId = setInterval(() => {
     refs.background.style.backgroundColor = getRandomHexColor();
@@ -30,4 +34,6 @@ refs.stopBtn.addEventListener('click', () => {
   }
   clearInterval(refs.timerId);
   refs.buttonIsActive = false;
+  refs.startBtn.disabled = false;
+  refs.stopBtn.disabled = true;
 });

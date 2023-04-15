@@ -33,18 +33,15 @@ flatpickr('#datetime-picker', {
 
     refs.startBtn.disabled = false;
     const targetTime = selectedDates[0].getTime();
-    this.isActive = true;
 
     refs.startBtn.addEventListener('click', () => {
-      this.intervalId = setInterval(() => {
+      const intervalId = setInterval(() => {
         const currentTime = Date.now();
         const deltaTime = targetTime - currentTime;
         const { days, hours, minutes, seconds } = convertMs(deltaTime);
-        // console.log(deltaTime);
         if (deltaTime <= 0) {
-          clearInterval(this.intervalId);
-          this.isActive = false;
-          Notiflix.Report.success('Johny Johny? Yes, papa!');
+          clearInterval(intervalId);
+          refs.startBtn.disabled = true;
         } else {
           updateTimer({ days, hours, minutes, seconds });
         }
